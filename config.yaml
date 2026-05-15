@@ -1,0 +1,32 @@
+# msg2irc configuration
+
+# --- TLS mode: off ---
+# Used when running behind a reverse proxy (Apache, nginx, Caddy).
+# msg2irc listens on localhost only; your web server handles HTTPS.
+listen_addr: "127.0.0.1:8080"
+
+# --- TLS mode: auto ---
+# msg2irc handles HTTPS itself via Let's Encrypt. No reverse proxy needed.
+# Requires ports 80 and 443 to be open and pointed at this server.
+
+# --- TLS mode: manual ---
+# Provide your own cert and key files.
+
+token: "changeme"
+
+tls:
+  mode: "off"           # off | auto | manual
+  domain: ""            # required for auto  (e.g. msg2irc.example.com)
+  cert: ""              # required for manual (e.g. /etc/ssl/msg2irc.crt)
+  key: ""               # required for manual (e.g. /etc/ssl/msg2irc.key)
+  listen_addr: ":443"   # used for auto and manual
+  cache_dir: "./certs"  # cert cache dir for auto mode
+
+irc:
+  server: "irc.example.com"
+  port: 6697
+  nick: "msg2irc"
+  tls: true
+  tls_hostname: "irc.example.com"
+  channels:
+    - "#yourchannel"
