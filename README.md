@@ -12,10 +12,15 @@ Runs as a persistent IRC bot on your server. Put it behind a reverse proxy and y
 ## How it works
 
 ```mermaid
-flowchart LR
-    A["HTTP client"] -->|"POST /send"| B(["msg2irc"])
-    B -->|"PRIVMSG"| C["IRC server"]
-    C --> D["#channel or nick"]
+sequenceDiagram
+    participant C as HTTP client
+    participant M as msg2irc
+    participant I as IRC server
+    participant Ch as #channel / nick
+
+    C->>M: POST /send
+    M->>I: PRIVMSG
+    I->>Ch: message
 ```
 
 ---
